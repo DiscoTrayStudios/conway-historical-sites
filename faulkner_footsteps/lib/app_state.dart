@@ -144,7 +144,7 @@ class ApplicationState extends ChangeNotifier {
         .doc(siteName)
         .update({"avgRating": finalRating, "ratingCount": ratingcount});
     notifyListeners();
-  }
+    }
 
   // Achievement Management Methods
   Future<void> loadAchievements() async {
