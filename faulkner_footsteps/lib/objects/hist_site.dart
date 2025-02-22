@@ -4,16 +4,16 @@ import 'package:faulkner_footsteps/objects/info_text.dart';
 import 'package:latlong2/latlong.dart';
 
 class HistSite {
-  HistSite({
-    required this.name,
-    required this.blurbs,
-    required this.description,
-    required this.imageUrls,
-    required this.avgRating,
-    required this.ratingAmount, required List images,
-    required this.lat,
-    required this.lng
-  });
+  HistSite(
+      {required this.name,
+      required this.blurbs,
+      required this.description,
+      required this.imageUrls,
+      required this.avgRating,
+      required this.ratingAmount,
+      required List images,
+      required this.lat,
+      required this.lng});
 
   String divider = "{ListDiv}";
   String name;
@@ -25,7 +25,6 @@ class HistSite {
   double lat;
   double lng;
 
-
   String listifyBlurbs() {
     String fin = "";
     for (var blurb in blurbs) {
@@ -34,11 +33,22 @@ class HistSite {
     return fin.substring(0, fin.length - divider.length);
   }
 
-  void updateRating(double newRating) {
-    avgRating = ((avgRating * ratingAmount) + newRating) / (ratingAmount + 1);
-    ratingAmount++;
+  void updateRating(double oldRating, double newRating, bool firstRating) {
+    print("Number of ratings: $ratingAmount");
+    print("Starting Rating: $avgRating");
+    double totalRating = 0;
+    if (firstRating) {
+      totalRating = avgRating * (ratingAmount - 1);
+    } else {
+      totalRating = avgRating * ratingAmount;
+    }
+    print("Total Rating: $totalRating");
+    totalRating -= oldRating;
+    avgRating = (totalRating + newRating) / (ratingAmount);
+    print("Average Rating: $avgRating");
   }
-  LatLng getLocation(){
+
+  LatLng getLocation() {
     return LatLng(lat, lng);
   }
 }

@@ -98,9 +98,10 @@ class _StartPageState extends State<StartPage>
                     ElevatedButton(
                         onPressed: _handleContinue,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 238, 214, 196),
-                          minimumSize: const Size(400, 100),
-                        ),
+                            backgroundColor: Color.fromARGB(255, 238, 214, 196),
+                            minimumSize: const Size(400, 100),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50))),
                         child: Text(
                           textScaler: TextScaler.linear(1.5),
                           'Get To Steppin',

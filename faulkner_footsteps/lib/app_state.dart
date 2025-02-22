@@ -157,19 +157,16 @@ class ApplicationState extends ChangeNotifier {
         .collection("ratings")
         .get()
         .then((snapshot) {
-      print("wrqwherkjqwhrjqwr");
       for (final doc in snapshot.docs) {
         totalRating += doc.data()["rating"];
         ratingcount += 1;
-        print("wrqwherkjqwhrjqwr");
-        print(totalRating);
-        print(ratingcount);
+        // print("AppState Total Rating: $totalRating");
+        // print("AppState Rating Count: $ratingcount");
       }
     });
     double finalRating = totalRating / ratingcount;
-    print("This is a final rating $finalRating");
-    site.avgRating = finalRating;
-    site.ratingAmount = ratingcount;
+    // print("This is a final rating $finalRating");
+
     FirebaseFirestore.instance
         .collection("sites")
         .doc(siteName)
@@ -231,15 +228,15 @@ class ApplicationState extends ChangeNotifier {
   bool hasVisited(String place) {
     return _visitedPlaces.contains(place);
   }
-  Map<String, LatLng> getLocations(){
+
+  Map<String, LatLng> getLocations() {
     int i = 0;
     Map<String, LatLng> sites = {};
-    while (i < historicalSites.length){
-      sites[historicalSites[i].name] = LatLng(historicalSites[i].lat, historicalSites[i].lng);
+    while (i < historicalSites.length) {
+      sites[historicalSites[i].name] =
+          LatLng(historicalSites[i].lat, historicalSites[i].lng);
       i++;
     }
     return sites;
-
   }
-
 }
