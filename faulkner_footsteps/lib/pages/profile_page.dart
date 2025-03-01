@@ -80,6 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 238, 214, 196),
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 107, 79, 79),
         iconTheme: const IconThemeData(
           color: Color.fromARGB(255, 255, 243, 228),

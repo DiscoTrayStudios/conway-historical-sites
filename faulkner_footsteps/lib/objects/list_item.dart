@@ -10,7 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 
 class ListItem extends StatelessWidget {
-  const ListItem({super.key, required this.siteInfo, required this.app_state, required this.currentPosition});
+  const ListItem(
+      {super.key,
+      required this.siteInfo,
+      required this.app_state,
+      required this.currentPosition});
   final HistSite siteInfo;
   final ApplicationState app_state;
   final LatLng currentPosition;
@@ -20,7 +24,8 @@ class ListItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color.fromARGB(255, 255, 243,
+              228), //const Color.fromARGB(255, 238, 214, 196). page background color. I think what i have looks better
           border: Border.all(
             color: const Color.fromARGB(255, 176, 133, 133),
             width: 3.0,
@@ -36,8 +41,11 @@ class ListItem extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {
-            AppRouter.navigateTo(context, "/hist",
-                arguments: {"info": siteInfo, "app_state": app_state, "currentPosition": currentPosition});
+            AppRouter.navigateTo(context, "/hist", arguments: {
+              "info": siteInfo,
+              "app_state": app_state,
+              "currentPosition": currentPosition
+            });
           },
           borderRadius: BorderRadius.circular(12),
           child: Column(
@@ -73,15 +81,15 @@ class ListItem extends StatelessWidget {
                     Flexible(
                       child: Text(
                         siteInfo.name,
-                        style: const TextStyle(
+                        style: GoogleFonts.ultra(
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 72, 52, 52), // Text color
+                          color: const Color.fromARGB(255, 107, 79,
+                              79), // Text color.   const Color.fromARGB(255, 107, 79, 79): Maroon. Previously: Color.fromARGB(255, 72, 52, 52)
                         ),
                         overflow:
                             TextOverflow.fade, // Fades text when it overflows
                         softWrap:
-                            false, // Prevents text from wrapping to a new line
+                            true, // Prevents text from wrapping to a new line
                       ),
                     ),
                     const SizedBox(width: 15),

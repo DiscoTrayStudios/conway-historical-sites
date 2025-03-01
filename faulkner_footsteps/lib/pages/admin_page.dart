@@ -54,7 +54,10 @@ class _AdminListPageState extends State<AdminListPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MapDisplay(currentPosition: const LatLng(1, 1), appState: new ApplicationState()),
+          builder: (context) => MapDisplay(
+              currentPosition: const LatLng(1, 1),
+              initialPosition: (const LatLng(1, 1)),
+              appState: new ApplicationState()),
         ),
       );
     } else {
@@ -104,7 +107,12 @@ class _AdminListPageState extends State<AdminListPage> {
           ),
         ),
       ),
-      body: _selectedIndex == 0 ? _buildHomeContent() :  MapDisplay(currentPosition: LatLng(2, 2), appState: new ApplicationState()),
+      body: _selectedIndex == 0
+          ? _buildHomeContent()
+          : MapDisplay(
+              currentPosition: LatLng(2, 2),
+              initialPosition: LatLng(2, 2),
+              appState: new ApplicationState()),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 218, 180, 130),
         selectedItemColor: const Color.fromARGB(255, 124, 54, 16),

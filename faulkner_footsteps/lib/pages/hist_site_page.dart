@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:faulkner_footsteps/app_state.dart';
 import 'package:faulkner_footsteps/dialogs/rating_Dialog.dart';
 import 'package:faulkner_footsteps/objects/hist_site.dart';
+import 'package:faulkner_footsteps/pages/map_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -101,6 +102,9 @@ class _HistSitePage extends State<HistSitePage> {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 238, 214, 196),
         appBar: AppBar(
+          leading: BackButton(
+            color: Color.fromARGB(255, 255, 243, 228),
+          ),
           backgroundColor: const Color.fromARGB(255, 107, 79, 79),
           title: Text(
             "Faulkner Footsteps",
@@ -124,17 +128,41 @@ class _HistSitePage extends State<HistSitePage> {
                       style: GoogleFonts.ultra(
                         textStyle: const TextStyle(
                             color: Color.fromARGB(255, 72, 52, 52),
-                            fontSize: 24.0,
+                            fontSize: 32.0,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text("$siteDistance mi",
-                        style: GoogleFonts.ultra(
-                          textStyle: const TextStyle(
-                              color: Color.fromARGB(255, 72, 52, 52),
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ))
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        textDirection: TextDirection.ltr,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MapDisplay(
+                                        currentPosition: widget.currentPosition,
+                                        initialPosition: LatLng(
+                                            widget.histSite.lat,
+                                            widget.histSite.lng),
+                                        appState: widget.app_state),
+                                  ),
+                                );
+                                ;
+                              },
+                              icon: Icon(
+                                Icons.location_on,
+                                color: Colors.red.shade700,
+                              )),
+                          Text("$siteDistance mi",
+                              style: GoogleFonts.ultra(
+                                textStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 72, 52, 52),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ])
                   ],
                 )),
             Container(
@@ -157,7 +185,8 @@ class _HistSitePage extends State<HistSitePage> {
                           context: context,
                           itemBuilder: (context, galleryIndex) {
                             return Image.memory(
-                              base64Decode(testList[galleryIndex]),
+                              base64Decode(testList[index]),
+                              fit: BoxFit.contain,
                               errorBuilder: (context, error, stackTrace) {
                                 return Image.asset(
                                     "assets/images/faulkner_thumbnail.png");
@@ -296,14 +325,14 @@ class _HistSitePage extends State<HistSitePage> {
                                 style: GoogleFonts.ultra(
                                     textStyle: const TextStyle(
                                         color: Color.fromARGB(255, 72, 52, 52),
-                                        fontSize: 16,
+                                        fontSize: 26,
                                         fontWeight: FontWeight.bold))),
                             const SizedBox(height: 6),
                             Text(infoText.value,
                                 style: GoogleFonts.rakkas(
                                     textStyle: const TextStyle(
                                         color: Color.fromARGB(255, 107, 79, 79),
-                                        fontSize: 14))),
+                                        fontSize: 20))),
                             if (infoText.date != "")
                               Padding(
                                 padding: const EdgeInsets.only(top: 8.0),
